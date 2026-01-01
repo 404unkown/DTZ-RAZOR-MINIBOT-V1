@@ -27,7 +27,7 @@ const {
 
 // ---------------- CONFIG ----------------
 
-const BOT_NAME_FANCY = '𝐐𝐔𝐄𝐄𝐍-𝐀𝐒𝐇𝐀 𝐌𝐈𝐍𝐈';
+const BOT_NAME_FANCY = 'DTZ RAZOR MD';
 
 const config = {
   AUTO_VIEW_STATUS: 'false',
