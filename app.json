@@ -1,0 +1,58 @@
+{
+  "name": "MAD MAX",
+  "description": "Multi-session WhatsApp Bot with MongoDB",
+  "repository": "https://github.com/404unkown/DTZ-RAZOR-MINIBOT-V1",
+  "logo": "https://files.catbox.moe/w3u2zn.png",
+  "keywords": [
+    "whatsapp",
+    "bot",
+    "multi-device",
+    "baileys",
+    "nodejs",
+    "mongodb"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ],
+  "env": {
+    "OWNER_NUMBER": {
+      "description": "Bot owner's WhatsApp number (format: 94761234567)",
+      "value": "94761527735"
+    },
+    "MONGO_URI": {
+      "description": "MongoDB connection string",
+      "value": "mongodb+srv://username:password@cluster0.mongodb.net/yourdb"
+    },
+    "PORT": {
+      "description": "Port for the web server",
+      "value": "3000",
+      "required": false
+    },
+    "PLATFORM": {
+      "description": "Deployment platform",
+      "value": "heroku",
+      "required": false
+    },
+    "GEMINI_API_KEY": {
+      "description": "Google Gemini API key for AI features (optional)",
+      "required": false
+    },
+    "OPENWEATHER_API_KEY": {
+      "description": "OpenWeather API key (optional)",
+      "required": false
+    }
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "eco"
+    }
+  },
+  "addons": [
+    {
+      "plan": "mongodb:sandbox"
+    }
+  ]
+}
