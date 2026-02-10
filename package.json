@@ -1,7 +1,7 @@
 {
-  "name": "QueenAshaBot",
+  "name": "MAD MAX",
   "version": "1.0.0",
-  "description": "Queen Asha Mini WhatsApp Bot with Multi-Number Support",
+  "description": "MAD MAX WhatsApp Bot with Multi-Number Support",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
