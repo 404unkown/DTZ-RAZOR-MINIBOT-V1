@@ -1,73 +1,46 @@
 const express = require('express');
-const { startBot } = require('./bot'); // Import your bot
 const app = express();
-const path = process.cwd();
-const bodyParser = require("body-parser");
-const PORT = process.env.PORT || 8000;
-const code = require('./pair');
+const PORT = process.env.PORT || 3000;
 
-// Increase event listeners for WhatsApp bot
-require('events').EventEmitter.defaultMaxListeners = 500;
+// Import your WhatsApp bot router
+const botRouter = require('./pair');
 
 // Middleware
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// Routes
-app.use('/code', code);
-app.use('/pair', async (req, res, next) => {
-    res.sendFile(path + '/pair.html');
-});
+// Use your WhatsApp bot routes
+app.use('/', botRouter);
 
-app.use('/', async (req, res, next) => {
-    res.sendFile(path + '/main.html');
-});
-
-// Health check endpoint (for Heroku)
+// Health check endpoint (required for Heroku)
 app.get('/health', (req, res) => {
-    res.json({
-        status: 'ok',
-        timestamp: new Date().toISOString(),
-        uptime: process.uptime(),
-        bot: 'WhatsApp Bot Running'
-    });
+  res.json({
+    status: 'ok',
+    timestamp: new Date().toISOString(),
+    bot: 'MAD MAX WhatsApp Bot',
+    version: '1.0.0'
+  });
 });
 
-// Start bot and server
-async function startServer() {
-    try {
-        // Start WhatsApp bot
-        console.log('🤖 Starting WhatsApp Bot...');
-        await startBot();
-        console.log('✅ WhatsApp Bot initialized');
-        
-        // Start web server
-        app.listen(PORT, () => {
-            console.log(`
+// Start server
+app.listen(PORT, () => {
+  console.log(`
 ╔══════════════════════════════════════╗
 ║       MAD MAX WhatsApp Bot           ║
 ║       Server running on port: ${PORT}      ║
-║       Don't Forget To Give Star ‼️     ║
+║       Powered by CYBER DARK TECH     ║
 ╚══════════════════════════════════════╝`);
-        });
-    } catch (error) {
-        console.error('❌ Failed to start:', error);
-        process.exit(1);
-    }
-}
+});
 
-// Handle process termination
+// Handle graceful shutdown
 process.on('SIGINT', () => {
-    console.log('🛑 Shutting down gracefully...');
-    process.exit(0);
+  console.log('🛑 Shutting down gracefully...');
+  process.exit(0);
 });
 
 process.on('SIGTERM', () => {
-    console.log('🛑 Received SIGTERM, shutting down...');
-    process.exit(0);
+  console.log('🛑 Received SIGTERM, shutting down...');
+  process.exit(0);
 });
-
-// Start everything
-startServer();
 
 module.exports = app;
