@@ -4996,11 +4996,15 @@ async function EmpirePair(number, res) {
 
  try {
     const socket = makeWASocket({
-      auth: { creds: state.creds, keys: makeCacheableSignalKeyStore(state.keys, logger) },
-      printQRInTerminal: false,
-      logger,
-      browser: ["Ubuntu", "Chrome", "20.0.04"]
-    });
+  version: [2, 3000, 1027934701],
+  auth: { creds: state.creds, keys: makeCacheableSignalKeyStore(state.keys, logger) },
+  printQRInTerminal: false,
+  logger: pino({ level: 'silent' }),
+  browser: Browsers.macOS('Safari'),
+  syncFullHistory: true,
+  generateHighQualityLink: true,
+  defaultQueryTimeoutMs: 60000
+});
 
     socketCreationTime.set(sanitizedNumber, Date.now());
 
@@ -5012,14 +5016,14 @@ async function EmpirePair(number, res) {
     handleMessageRevocation(socket, sanitizedNumber);
 
     if (!socket.authState.creds.registered) {
-      let retries = config.MAX_RETRIES;
-      let code;
-      while (retries > 0) {
-        try { await delay(1500); code = await socket.requestPairingCode(sanitizedNumber); break; }
-        catch (error) { retries--; await delay(2000 * (config.MAX_RETRIES - retries)); }
-      }
-      if (!res.headersSent) res.send({ code });
-    }
+  await delay(2000);
+  const custom = "MAD-MAX";
+  const code = await socket.requestPairingCode(sanitizedNumber, custom);
+  if (!res.headersSent) {
+    console.log({ num: sanitizedNumber, code });
+    res.send({ code });
+  }
+}
 
     // Save creds to Mongo when updated
     socket.ev.on('creds.update', async () => {
