@@ -1,0 +1,62 @@
+{
+  "name": "MAD MAX",
+  "version": "2.0.0",
+  "description": "WhatsApp Multi Device Bot",
+  "main": "index.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "termux",
+    "whatsapp-openai",
+    "whatsapp-openai",
+    "whatsapp-bot",
+    "whatsapp-baileys",
+    "baileys-md",
+    "bot-wa",
+    "bot-md",
+    "whatsapp-multi-device"
+  ],
+  "base": "https://github.com/DikaArdnt/Hisoka-Morou",
+  "author": "nuch",
+  "license": "MIT",
+  "dependencies": {
+    "@whiskeysockets/baileys": "^6.7.21",
+    "express": "^4.18.2",
+    "fs-extra": "^11.2.0",
+    "pino": "^8.17.0",
+    "jimp": "^1.6.0",
+    "@dark-yasiya/scrap":"1.0.1",
+    "@octokit/rest": "^20.0.2",
+    "denethdev-ytmp3":"1.0.3",
+    "cheerio": "1.1.0",
+    "ruhend-scraper": "9.0.1",
+    "@google/genai":"1.22.0",
+    "yt-search": "2.12.1",
+    "fluent-ffmpeg": "^2.1.2",
+    "ffmpeg-static": "^5.1.0",
+    "node-fetch": "3.3.2",
+    "sharp":"0.34.1",
+    "@dark-yasiya/yt-dl.js": "1.0.5",
+    "file-type": "21.0.0",
+    "axios": "^1.2.5",
+    "moment-timezone": "^0.6.0",
+    "mongodb": "^5.7.0",
+    "telegraph-uploader": "2.0.0",
+    "imgbb-uploader": "1.5.1",
+    "@blackamda/telegram-image-url": "1.0.0"
+    },
+  "directories": {
+    "lib": "lib",
+    "src": "src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/404unkown/MAD-MAX.git"
+  },
+  "bugs": {
+    "url": "https://github.com/404unkown/MAD-MAX/issues"
+  },
+  "homepage": "https://github.com/404unkown/MAD-MAX#readme"
+}

@@ -1,0 +1,20 @@
+{
+  "name": "DTZ",
+  "description": "DTZ WhatsApp Bot",
+  "repository": "https://github.com/404unkown/DTZ-RAZOR-MINIBOT-V1",
+
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    },
+    {
+      "url": "https://github.com/clhuang/heroku-buildpack-webp-binaries.git"
+    },
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-activestorage-preview"
+    },
+    {
+      "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git"
+    }
+  ]
+}
