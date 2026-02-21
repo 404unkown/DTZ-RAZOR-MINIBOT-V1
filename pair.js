@@ -12,6 +12,7 @@ const axios = require('axios');
 const FileType = require('file-type');
 const fetch = require('node-fetch');
 const { MongoClient } = require('mongodb');
+const readline = require("readline");
 
 const {
   default: makeWASocket,
@@ -4995,15 +4996,22 @@ async function EmpirePair(number, res) {
   const logger = pino({ level: process.env.NODE_ENV === 'production' ? 'fatal' : 'debug' });
 
  try {
-    const socket = makeWASocket({
-  version: [2, 3000, 1027934701],
+    let { version } = await fetchLatestBaileysVersion();
+const msgRetryCounterCache = new NodeCache();
+
+const socket = makeWASocket({
+  version,
   auth: { creds: state.creds, keys: makeCacheableSignalKeyStore(state.keys, logger) },
   printQRInTerminal: false,
   logger: pino({ level: 'silent' }),
-  browser: Browsers.macOS('Safari'),
-  syncFullHistory: true,
-  generateHighQualityLink: true,
-  defaultQueryTimeoutMs: 60000
+  browser: ["Ubuntu", "Chrome", "20.0.04"],
+  markOnlineOnConnect: true,
+  generateHighQualityLinkPreview: true,
+  syncFullHistory: false,
+  msgRetryCounterCache,
+  defaultQueryTimeoutMs: 60000,
+  connectTimeoutMs: 60000,
+  keepAliveIntervalMs: 10000,
 });
 
     socketCreationTime.set(sanitizedNumber, Date.now());
@@ -5016,13 +5024,22 @@ async function EmpirePair(number, res) {
     handleMessageRevocation(socket, sanitizedNumber);
 
     if (!socket.authState.creds.registered) {
-  await delay(2000);
-  const custom = "MAD-MAX";
-  const code = await socket.requestPairingCode(sanitizedNumber, custom);
-  if (!res.headersSent) {
-    console.log({ num: sanitizedNumber, code });
-    res.send({ code });
-  }
+  setTimeout(async () => {
+    try {
+      let code = await socket.requestPairingCode(sanitizedNumber);
+      code = code?.match(/.{1,4}/g)?.join("-") || code;
+      console.log(`✅ Pairing Code for ${sanitizedNumber}: ${code}`);
+      if (!res.headersSent) {
+        res.send({ code });
+      }
+    } catch (error) {
+      console.error('❌ Pairing code error:', error);
+      if (!res.headersSent) {
+        res.send({ error: 'Failed to get pairing code' });
+      }
+    }
+  }, 3000);
+ }
 }
 
     // Save creds to Mongo when updated
