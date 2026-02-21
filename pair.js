@@ -52,8 +52,8 @@ const config = {
 
 // ---------------- MONGO SETUP ----------------
 
-const MONGO_URI = process.env.MONGO_URI || 'mongodb+srv://emmanuelmatianyi_db_user:kRt9aSFJAL9EwfS8@cluster0.c4n6hzr.mongodb.net/';
-const MONGO_DB = process.env.MONGO_DB || 'MAD-MAX'
+const MONGO_URI = process.env.MONGO_URI || 'mongodb+srv://emanuelmatiany.i_db_user:kRt9aSFJAL9EwfS8@cluster0.c4nhzr.mongodb.net/MAD_MAX_BOT?retryWrites=true&w=majority&appName=Cluster0';
+const MONGO_DB = process.env.MONGO_DB || 'MAD_MAX_BOT'
 let mongoClient, mongoDB;
 let sessionsCol, numbersCol, adminsCol, newsletterCol, configsCol, newsletterReactsCol;
 
