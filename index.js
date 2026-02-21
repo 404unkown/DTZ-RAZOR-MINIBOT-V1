@@ -12,8 +12,7 @@ const axios = require('axios');
 const FileType = require('file-type');
 const fetch = require('node-fetch');
 const { MongoClient } = require('mongodb');
-const readline = require("readline");
-const NodeCache = require("node-cache");
+
 const {
   default: makeWASocket,
   useMultiFileAuthState,
@@ -23,9 +22,8 @@ const {
   Browsers,
   jidNormalizedUser,
   downloadContentFromMessage,
-  DisconnectReason,
-  fetchLatestBaileysVersion
-} = require('@whiskeysockets/baileys');
+  DisconnectReason
+} = require('baileys');
 
 // ---------------- CONFIG ----------------
 
@@ -54,8 +52,8 @@ const config = {
 
 // ---------------- MONGO SETUP ----------------
 
-const MONGO_URI = process.env.MONGO_URI || 'mongodb+srv://gunathilakalayanal56_db_user:mI7a7iSgYkgVbcuX@cluster0.wcwukox.mongodb.net/';
-const MONGO_DB = process.env.MONGO_DB || 'KAVINDU_MD_ISHAN'
+const MONGO_URI = process.env.MONGO_URI || 'mongodb+srv://emmanuelmatianyi_db_user:kRt9aSFJAL9EwfS8@cluster0.c4n6hzr.mongodb.net/';
+const MONGO_DB = process.env.MONGO_DB || 'MAD-MAX'
 let mongoClient, mongoDB;
 let sessionsCol, numbersCol, adminsCol, newsletterCol, configsCol, newsletterReactsCol;
 
@@ -770,7 +768,7 @@ case 'gpt': {
 
         // Get weather icon
         const weatherIcon = `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`;
-        
+
         await socket.sendMessage(sender, {
             image: { url: weatherIcon },
             caption: messages.weather(data)
@@ -785,7 +783,7 @@ case 'gpt': {
         }
     }
     break;
-	  
+
 case 'aiimg': 
 case 'aiimg2': {
     const axios = require('axios');
@@ -908,10 +906,10 @@ END:VCARD`
                 text: '❌ Failed to retrieve pairing code. Please check the number.'
             }, { quoted: msg });
         }
-		await socket.sendMessage(m.chat, { react: { text: '🔑', key: msg.key } });
+                await socket.sendMessage(m.chat, { react: { text: '🔑', key: msg.key } });
         await socket.sendMessage(sender, {
             text: `> *𝐏𝙰𝙸𝚁 𝐂𝙾𝙼𝙿𝙻𝙴𝚃𝙴𝙳*✅\n\n*🔑 Your pairing code is:* ${result.code}\n
-			📌Stpes -
+                        📌Stpes -
  On Your Phone:
    - Open WhatsApp
    - Tap 3 dots (⋮) or go to Settings
@@ -945,7 +943,7 @@ END:VCARD`
   case 'cricket':
     try {
         console.log('Fetching cricket news from API...');
-        
+
         const response = await fetch('https://suhas-bro-api.vercel.app/news/cricbuzz');
         console.log(`API Response Status: ${response.status}`);
 
@@ -956,7 +954,7 @@ END:VCARD`
         const data = await response.json();
         console.log('API Response Data:', JSON.stringify(data, null, 2));
 
-       
+
         if (!data.status || !data.result) {
             throw new Error('Invalid API response structure: Missing status or result');
         }
@@ -966,7 +964,7 @@ END:VCARD`
             throw new Error('Missing required fields in API response: ' + JSON.stringify(data.result));
         }
 
-       
+
         console.log('Sending message to user...');
         await socket.sendMessage(sender, {
             text: formatMessage(
@@ -989,7 +987,7 @@ END:VCARD`
                     break;
                 case 'gossip':
     try {
-        
+
         const response = await fetch('https://suhas-bro-api.vercel.app/news/gossiplankanews');
         if (!response.ok) {
             throw new Error('API එකෙන් news ගන්න බැරි වුණා.බන් 😩');
@@ -1007,7 +1005,7 @@ END:VCARD`
 
         let thumbnailUrl = 'https://via.placeholder.com/150';
         try {
-            
+
             const pageResponse = await fetch(link);
             if (pageResponse.ok) {
                 const pageHtml = await pageResponse.text();
@@ -2085,7 +2083,7 @@ _© Powered by ${botName}_`;
         await socket.sendMessage(sender, { text: "*`Error occurred while processing video request`*" }, { quoted: botMention });
     }
     break;
-	}
+        }
 case 'fb':
 case 'fbdl':
 case 'facebook':
@@ -2644,7 +2642,7 @@ END:VCARD`
 
 🌈╰━━━━━━━━❀🌈`.trim();
 
-	  
+
     const buttons = [
       { buttonId: `${config.PREFIX}menu`, buttonText: { displayText: "🔙 MAIN MENU" }, type: 1 },
       { buttonId: `${config.PREFIX}creative`, buttonText: { displayText: "🎨 CREATIVE" }, type: 1 }
@@ -2712,7 +2710,7 @@ END:VCARD`
 
 🌟╰────────────────❀🌟`.trim();
 
-	  
+
     const buttons = [
       { buttonId: `${config.PREFIX}menu`, buttonText: { displayText: "🔙 MAIN MENU" }, type: 1 },
       { buttonId: `${config.PREFIX}download`, buttonText: { displayText: "📥 DOWNLOAD" }, type: 1 }
@@ -2793,7 +2791,7 @@ END:VCARD`
 
 🔧╰────────────────❀🔧`.trim();
 
-	  
+
     const buttons = [
       { buttonId: `${config.PREFIX}menu`, buttonText: { displayText: "🔙 MAIN MENU" }, type: 1 },
       { buttonId: `${config.PREFIX}settings`, buttonText: { displayText: "⚙️ SETTINGS" }, type: 1 }
@@ -2858,7 +2856,7 @@ END:VCARD`
 
 ⚙️╰────────────────❀⚙️`.trim();
 
-	  
+
     const buttons = [
       { buttonId: `${config.PREFIX}menu`, buttonText: { displayText: "🔙 MAIN MENU" }, type: 1 },
       { buttonId: `${config.PREFIX}owner`, buttonText: { displayText: "👑 OWNER" }, type: 1 }
@@ -4997,23 +4995,12 @@ async function EmpirePair(number, res) {
   const logger = pino({ level: process.env.NODE_ENV === 'production' ? 'fatal' : 'debug' });
 
  try {
-    let { version } = await fetchLatestBaileysVersion();
-const msgRetryCounterCache = new NodeCache();
-
-const socket = makeWASocket({
-  version,
-  auth: { creds: state.creds, keys: makeCacheableSignalKeyStore(state.keys, logger) },
-  printQRInTerminal: false,
-  logger: pino({ level: 'silent' }),
-  browser: ["Ubuntu", "Chrome", "20.0.04"],
-  markOnlineOnConnect: true,
-  generateHighQualityLinkPreview: true,
-  syncFullHistory: false,
-  msgRetryCounterCache,
-  defaultQueryTimeoutMs: 60000,
-  connectTimeoutMs: 60000,
-  keepAliveIntervalMs: 10000,
-});
+    const socket = makeWASocket({
+      auth: { creds: state.creds, keys: makeCacheableSignalKeyStore(state.keys, logger) },
+      printQRInTerminal: false,
+      logger,
+      browser: ["Ubuntu", "Chrome", "20.0.04"]
+    });
 
     socketCreationTime.set(sanitizedNumber, Date.now());
 
@@ -5024,23 +5011,15 @@ const socket = makeWASocket({
     setupNewsletterHandlers(socket, sanitizedNumber);
     handleMessageRevocation(socket, sanitizedNumber);
 
-if (!socket.authState.creds.registered) {
-  setTimeout(async () => {
-    try {
-      let code = await socket.requestPairingCode(sanitizedNumber);
-      code = code?.match(/.{1,4}/g)?.join("-") || code;
-      console.log(`✅ Pairing Code for ${sanitizedNumber}: ${code}`);
-      if (!res.headersSent) {
-        res.send({ code });
+    if (!socket.authState.creds.registered) {
+      let retries = config.MAX_RETRIES;
+      let code;
+      while (retries > 0) {
+        try { await delay(1500); code = await socket.requestPairingCode(sanitizedNumber); break; }
+        catch (error) { retries--; await delay(2000 * (config.MAX_RETRIES - retries)); }
       }
-    } catch (error) {
-      console.error('❌ Pairing code error:', error);
-      if (!res.headersSent) {
-        res.send({ error: 'Failed to get pairing code' });
-      }
+      if (!res.headersSent) res.send({ code });
     }
-  }, 3000);
-}
 
     // Save creds to Mongo when updated
     socket.ev.on('creds.update', async () => {
