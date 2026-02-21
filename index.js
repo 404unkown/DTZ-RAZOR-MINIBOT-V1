@@ -13,7 +13,7 @@ const FileType = require('file-type');
 const fetch = require('node-fetch');
 const { MongoClient } = require('mongodb');
 const readline = require("readline");
-
+const NodeCache = require("node-cache");
 const {
   default: makeWASocket,
   useMultiFileAuthState,
