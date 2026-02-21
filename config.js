@@ -5,7 +5,7 @@ module.exports = {
     AUTO_LIKE_EMOJI: ['🧩', '🍉', '💜', '🌸', '🪴', '💊', '💫', '🍂', '🌟', '🎋', '😶‍🌫️', '🫀', '🧿', '👀', '🤖', '🚩', '🥰', '🗿', '💜', '💙', '🌝', '🖤', '💚'],
     PREFIX: '.',
     MAX_RETRIES: 3,
-    GROUP_INVITE_LINK: 'https://chat.whatsapp.com/LMlfzAc3iDj2pdQMmxwoXu',
+    GROUP_INVITE_LINK: 'https://chat.whatsapp.com/KinePVONONt4cuOOC3TL9S?mode=gi_t',
     ADMIN_LIST_PATH: './admin.json',
     IMAGE_PATH: 'https://i.ibb.co/XkyWNN4Q/tourl-1765878318885.jpg',
     NEWSLETTER_JID: '120363406176407309@newsletter',
@@ -17,5 +17,5 @@ module.exports = {
     OWNER_NUMBER: '94761527735,94765849446',
     BOT_VERSION: '5.0.0',
     BOT_FOOTER: '> ＮＩＫＫＡ ＭＩＮＩ Ｖ1',
-    CHANNEL_LINK: 'https://whatsapp.com/channel/0029Vb6DWa2FnSzANppXMb1u',
+    CHANNEL_LINK: 'https://whatsapp.com/channel/0029VbCiGPDJUM2XNhXSfz0U',
 };
