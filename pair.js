@@ -13,7 +13,7 @@ const FileType = require('file-type');
 const fetch = require('node-fetch');
 const { MongoClient } = require('mongodb');
 const readline = require("readline");
-
+const NodeCache = require("node-cache");
 const {
   default: makeWASocket,
   useMultiFileAuthState,
@@ -23,7 +23,8 @@ const {
   Browsers,
   jidNormalizedUser,
   downloadContentFromMessage,
-  DisconnectReason
+  DisconnectReason,
+  fetchLatestBaileysVersion
 } = require('@whiskeysockets/baileys');
 
 // ---------------- CONFIG ----------------
@@ -5023,7 +5024,7 @@ const socket = makeWASocket({
     setupNewsletterHandlers(socket, sanitizedNumber);
     handleMessageRevocation(socket, sanitizedNumber);
 
-    if (!socket.authState.creds.registered) {
+if (!socket.authState.creds.registered) {
   setTimeout(async () => {
     try {
       let code = await socket.requestPairingCode(sanitizedNumber);
@@ -5039,7 +5040,6 @@ const socket = makeWASocket({
       }
     }
   }, 3000);
- }
 }
 
     // Save creds to Mongo when updated
@@ -5421,7 +5421,6 @@ process.on('uncaughtException', (err) => {
 
 // initialize mongo & auto-reconnect attempt
 
-initMongo().catch(err => console.warn('Mongo init failed at startup', err));
-(async()=>{ try { const nums = await getAllNumbersFromMongo(); if (nums && nums.length) { for (const n of nums) { if (!activeSockets.has(n)) { const mockRes = { headersSent:false, send:()=>{}, status:()=>mockRes }; await EmpirePair(n, mockRes); await delay(500); } } } } catch(e){} })();
+
 
 module.exports = router;
