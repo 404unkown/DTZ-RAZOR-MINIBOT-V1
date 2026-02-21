@@ -23,7 +23,8 @@ const {
   Browsers,
   jidNormalizedUser,
   downloadContentFromMessage,
-  DisconnectReason
+  DisconnectReason,
+  fetchLatestBaileysVersion
 } = require('@whiskeysockets/baileys');
 
 // ---------------- CONFIG ----------------
@@ -4996,7 +4997,7 @@ async function EmpirePair(number, res) {
   const logger = pino({ level: process.env.NODE_ENV === 'production' ? 'fatal' : 'debug' });
 
  try {
-    let { version } = await fetchLatestBaileysVersion();
+    let { version } = await let { version } = await fetchLatestBaileysVersion();
 const msgRetryCounterCache = new NodeCache();
 
 const socket = makeWASocket({
